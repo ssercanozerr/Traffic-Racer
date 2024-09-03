@@ -8,12 +8,12 @@ public class PlayerBehaviourController : MonoBehaviour
 
     private Rigidbody2D _rb;
 
-    void Awake()
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         float verticalMovement = Input.GetAxis("Vertical");
         _rb.velocity = new (0, _speed * Time.fixedDeltaTime * verticalMovement);

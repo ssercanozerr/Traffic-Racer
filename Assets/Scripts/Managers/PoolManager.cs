@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    [SerializeField] PoolController _poolController;
+    [SerializeField] private PoolController _poolController;
 
     private void OnEnable()
     {

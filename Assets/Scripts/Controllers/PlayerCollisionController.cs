@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Signals;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
@@ -8,7 +9,7 @@ namespace Assets.Scripts.Controllers
         {
             if (collision.gameObject.CompareTag("Car"))
             {
-                
+                GameSignal.Instance.onGameOver?.Invoke();
             }
         }
     }

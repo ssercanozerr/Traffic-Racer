@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enums;
 using Assets.Scripts.Signals;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -11,6 +12,9 @@ namespace Assets.Scripts.Controllers
         [SerializeField] private float _yMin;
         [SerializeField] private float _yMax;
         [SerializeField] private float second;
+
+        [SerializeField] private GameObject _endPanel;
+        [SerializeField] private TextMeshProUGUI _finalScoreText;
 
         private void Start()
         {
@@ -26,6 +30,17 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        public void OnGameOver()
+        {
+            AudioSignal.Instance.OnCarIdleSoundStop?.Invoke();
+            AudioSignal.Instance.onCarCrashSoundPlay?.Invoke();
+
+            _finalScoreText.text = CanvasSignal.Instance.OnGetFinalScore?.Invoke().ToString();
+            _endPanel.SetActive(true);
+            
+            Time.timeScale = 0f;
+        }
+
         private GameObject GetRandomCar()
         {
             int carType = Random.Range(0, 7);
@@ -39,6 +54,5 @@ namespace Assets.Scripts.Controllers
         {
             car.transform.position = new Vector2(_xPosition, Random.Range(_yMin, _yMax));
         }
-
     }
 }

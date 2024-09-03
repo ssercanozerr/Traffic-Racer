@@ -20,6 +20,20 @@ public class PoolController : MonoBehaviour
         CreateObjectPool();
     }
 
+    public GameObject OnGetObjectFromPool(EntityTypes entityType)
+    {
+        if (pools[(int)entityType].pooledObjects == null || pools[(int)entityType].pooledObjects.Count == 0)
+        {
+            return null;
+        }
+
+        GameObject obj = pools[(int)entityType].pooledObjects.Dequeue();
+        obj.SetActive(true);
+        pools[(int)entityType].pooledObjects.Enqueue(obj);
+
+        return obj;
+    }
+
     private void CreateObjectPool()
     {
         for (int i = 0; i < pools.Length; i++)
@@ -33,19 +47,5 @@ public class PoolController : MonoBehaviour
                 pools[i].pooledObjects.Enqueue(obj);
             }
         }
-    }
-
-    public GameObject OnGetObjectFromPool(EntityTypes entityType)
-    {
-        if (pools[(int)entityType].pooledObjects == null || pools[(int)entityType].pooledObjects.Count == 0)
-        {
-            return null;
-        }
-
-        GameObject obj = pools[(int)entityType].pooledObjects.Dequeue();
-        obj.SetActive(true);
-        pools[(int)entityType].pooledObjects.Enqueue(obj);
-
-        return obj;
     }
 }

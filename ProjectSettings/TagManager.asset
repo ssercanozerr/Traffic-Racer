@@ -49,3 +49,6 @@ TagManager:
   - name: Objects
     uniqueID: 799991149
     locked: 0
+  - name: Canvas
+    uniqueID: 2555282655
+    locked: 0
