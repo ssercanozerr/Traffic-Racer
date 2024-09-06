@@ -15,7 +15,7 @@ namespace Assets.Scripts.Controllers
             _scoreText.text = _score.ToString();
         }
 
-        public int OnGetFinalScore()
+        public int OnGetScore()
         {
             return _score;
         }

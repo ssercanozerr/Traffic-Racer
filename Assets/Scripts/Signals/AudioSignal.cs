@@ -8,7 +8,7 @@ namespace Assets.Scripts.Signals
         public static AudioSignal Instance;
 
         public UnityAction onCarCrashSoundPlay;
-        public UnityAction OnCarIdleSoundStop;
+        public UnityAction onCarIdleSoundStop;
 
         private void Awake()
         {

@@ -8,10 +8,16 @@ namespace Assets.Scripts.Controllers
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private float _xPosition;
-        [SerializeField] private float _yMin;
-        [SerializeField] private float _yMax;
-        [SerializeField] private float second;
+        [SerializeField] private float _spawnPositionX;
+        [SerializeField] private float _spawnPositionYMin;
+        [SerializeField] private float _spawnPositionYMax;
+        [SerializeField] private float _spawnPositionZ;
+
+        [SerializeField] private float _spawnTime;
+        [SerializeField] private float _spawnTimeMin;
+        [SerializeField] private float _spawnTimeDependentScore;
+        [SerializeField] private float _spawnTimeDecreaseAmount;
+        [SerializeField] private float _spawnTimeDependentScoreIncreaseAmount;
 
         [SerializeField] private GameObject _endPanel;
         [SerializeField] private TextMeshProUGUI _finalScoreText;
@@ -26,16 +32,22 @@ namespace Assets.Scripts.Controllers
             while (true)
             {
                 GetRandomCar();
-                yield return new WaitForSeconds(second);
+                yield return new WaitForSeconds(_spawnTime);
+
+                if (CanvasSignal.Instance.onGetScore?.Invoke() >= _spawnTimeDependentScore && _spawnTime != _spawnTimeMin)
+                {
+                    _spawnTime -= _spawnTimeDecreaseAmount;
+                    _spawnTimeDependentScore += _spawnTimeDependentScoreIncreaseAmount;
+                }
             }
         }
 
         public void OnGameOver()
         {
-            AudioSignal.Instance.OnCarIdleSoundStop?.Invoke();
+            AudioSignal.Instance.onCarIdleSoundStop?.Invoke();
             AudioSignal.Instance.onCarCrashSoundPlay?.Invoke();
 
-            _finalScoreText.text = CanvasSignal.Instance.OnGetFinalScore?.Invoke().ToString();
+            _finalScoreText.text = CanvasSignal.Instance.onGetScore?.Invoke().ToString();
             _endPanel.SetActive(true);
             
             Time.timeScale = 0f;
@@ -43,7 +55,7 @@ namespace Assets.Scripts.Controllers
 
         private GameObject GetRandomCar()
         {
-            int carType = Random.Range(0, 7);
+            int carType = Random.Range(0, 4);
             EntityTypes selectedCarType = (EntityTypes)carType;
             GameObject car = PoolSignal.Instance.onGetObjectFromPool?.Invoke(selectedCarType);
             SetRandomPosition(car);
@@ -52,7 +64,7 @@ namespace Assets.Scripts.Controllers
 
         private void SetRandomPosition(GameObject car)
         {
-            car.transform.position = new Vector2(_xPosition, Random.Range(_yMin, _yMax));
+            car.transform.position = new Vector3(_spawnPositionX, Random.Range(_spawnPositionYMin, _spawnPositionYMax), _spawnPositionZ);
         }
     }
 }

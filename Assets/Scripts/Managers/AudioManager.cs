@@ -11,13 +11,13 @@ namespace Assets.Scripts.Managers
         private void OnEnable()
         {
             AudioSignal.Instance.onCarCrashSoundPlay += _audioController.OnCarCrashSoundPlay;
-            AudioSignal.Instance.OnCarIdleSoundStop += _audioController.OnCarIdleSoundStop;
+            AudioSignal.Instance.onCarIdleSoundStop += _audioController.OnCarIdleSoundStop;
         }
 
         private void OnDisable()
         {
             AudioSignal.Instance.onCarCrashSoundPlay -= _audioController.OnCarCrashSoundPlay;
-            AudioSignal.Instance.OnCarIdleSoundStop -= _audioController.OnCarIdleSoundStop;
+            AudioSignal.Instance.onCarIdleSoundStop -= _audioController.OnCarIdleSoundStop;
         }
     }
 }

@@ -11,14 +11,14 @@ namespace Assets.Scripts.Managers
 
         private void OnEnable()
         {
-            CanvasSignal.Instance.OnUpdateScore += _canvasController.OnUpdateScore;
-            CanvasSignal.Instance.OnGetFinalScore += _canvasController.OnGetFinalScore;
+            CanvasSignal.Instance.onUpdateScore += _canvasController.OnUpdateScore;
+            CanvasSignal.Instance.onGetScore += _canvasController.OnGetScore;
         }
 
         private void OnDisable()
         {
-            CanvasSignal.Instance.OnUpdateScore -= _canvasController.OnUpdateScore;
-            CanvasSignal.Instance.OnGetFinalScore -= _canvasController.OnGetFinalScore;
+            CanvasSignal.Instance.onUpdateScore -= _canvasController.OnUpdateScore;
+            CanvasSignal.Instance.onGetScore -= _canvasController.OnGetScore;
         }
     }
 }

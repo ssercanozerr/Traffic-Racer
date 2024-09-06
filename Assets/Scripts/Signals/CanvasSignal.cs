@@ -8,8 +8,8 @@ namespace Assets.Scripts.Signals
     {
         public static CanvasSignal Instance;
 
-        public UnityAction<int> OnUpdateScore;
-        public Func<int> OnGetFinalScore;
+        public UnityAction<int> onUpdateScore;
+        public Func<int> onGetScore;
 
         private void Awake()
         {

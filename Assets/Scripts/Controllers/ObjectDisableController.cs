@@ -7,11 +7,11 @@ namespace Assets.Scripts.Controllers
     {
         [SerializeField] private int _score;
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Car"))
             {
-                CanvasSignal.Instance.OnUpdateScore?.Invoke(_score);
+                CanvasSignal.Instance.onUpdateScore?.Invoke(_score);
                 collision.gameObject.SetActive(false);
             }
         }

@@ -6,16 +6,16 @@ namespace Assets.Scripts.Controllers
     {
         [SerializeField] private float _speed;
 
-        private Rigidbody2D _rb;
+        private Rigidbody _rb;
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()
         {
-            _rb.velocity = _speed * Time.fixedDeltaTime * Vector2.left;
+            _rb.velocity = _speed * Time.fixedDeltaTime * Vector3.left;
         }
     }
 }

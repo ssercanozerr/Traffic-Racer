@@ -5,7 +5,7 @@ namespace Assets.Scripts.Controllers
 {
     public class PlayerCollisionController : MonoBehaviour
     {
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Car"))
             {
