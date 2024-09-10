@@ -51,7 +51,7 @@ When we run our project, we are greeted with the interface as shown below. We mu
 
 When we start the game, we must progress without hitting the obstacles we encounter. Below are some frames from the game.
 
-![Ekran görüntüsü 2024-09-07 152508](https://github.com/user-attachments/assets/5f91a9b9-5436-485f-8892-51d43e6b3d1b)
+![Ekran görüntüsü 2024-09-09 154507](https://github.com/user-attachments/assets/c48e7c40-6887-4000-81b0-fda6ffda25e3)
 ![Ekran görüntüsü 2024-09-07 152224](https://github.com/user-attachments/assets/90fcd093-3de6-4cdc-b890-e8d53f24a7bd)
 
 ---
