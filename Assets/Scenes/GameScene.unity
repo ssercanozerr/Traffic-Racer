@@ -225,14 +225,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPositionX: 12
-  _spawnPositionYMin: -3.23
-  _spawnPositionYMax: 3.23
+  _spawnPositionsY:
+  - -3.25
+  - -1.15
+  - 1.15
+  - 3.25
   _spawnPositionZ: 0
   _spawnTime: 3
   _spawnTimeMin: 1.5
-  _spawnTimeDependentScore: 50
+  _spawnTimeDependentScore: 200
   _spawnTimeDecreaseAmount: 0.5
-  _spawnTimeDependentScoreIncreaseAmount: 50
+  _spawnTimeDependentScoreIncreaseAmount: 200
   _endPanel: {fileID: 1319967317}
   _finalScoreText: {fileID: 1139098949}
 --- !u!114 &243518271
@@ -358,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 1139098950}
+  _scorePerSecond: 10
 --- !u!1001 &436293211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,6 +622,18 @@ PrefabInstance:
       propertyPath: Loop
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2172845215825854922, guid: 788f99c0acce4384a91a6c213fb34068, type: 3}
+      propertyPath: _speed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172845215825854922, guid: 788f99c0acce4384a91a6c213fb34068, type: 3}
+      propertyPath: _lerpSpeed
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172845215825854922, guid: 788f99c0acce4384a91a6c213fb34068, type: 3}
+      propertyPath: _smoothTime
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3318070089346760881, guid: 788f99c0acce4384a91a6c213fb34068, type: 3}
       propertyPath: m_Size.x
       value: 1.6689388
@@ -736,7 +752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9308966c2f416b4bb2c49a98043b69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 10
 --- !u!65 &649435409
 BoxCollider:
   m_ObjectHideFlags: 0

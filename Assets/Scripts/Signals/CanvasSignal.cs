@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Assets.Scripts.Signals
 {
@@ -8,8 +7,7 @@ namespace Assets.Scripts.Signals
     {
         public static CanvasSignal Instance;
 
-        public UnityAction<int> onUpdateScore;
-        public Func<int> onGetScore;
+        public Func<float> onGetScore;
 
         private void Awake()
         {

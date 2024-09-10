@@ -1,17 +1,15 @@
-﻿using Assets.Scripts.Signals;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
     public class ObjectDisableController : MonoBehaviour
     {
-        [SerializeField] private int _score;
+        private string _tagName = "Car";
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Car"))
+            if (collision.gameObject.CompareTag(_tagName))
             {
-                CanvasSignal.Instance.onUpdateScore?.Invoke(_score);
                 collision.gameObject.SetActive(false);
             }
         }

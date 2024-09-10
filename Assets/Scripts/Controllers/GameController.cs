@@ -9,8 +9,7 @@ namespace Assets.Scripts.Controllers
     public class GameController : MonoBehaviour
     {
         [SerializeField] private float _spawnPositionX;
-        [SerializeField] private float _spawnPositionYMin;
-        [SerializeField] private float _spawnPositionYMax;
+        [SerializeField] private float[] _spawnPositionsY;
         [SerializeField] private float _spawnPositionZ;
 
         [SerializeField] private float _spawnTime;
@@ -64,7 +63,9 @@ namespace Assets.Scripts.Controllers
 
         private void SetRandomPosition(GameObject car)
         {
-            car.transform.position = new Vector3(_spawnPositionX, Random.Range(_spawnPositionYMin, _spawnPositionYMax), _spawnPositionZ);
+            float randomLaneY = _spawnPositionsY[Random.Range(0, _spawnPositionsY.Length)];
+
+            car.transform.position = new (_spawnPositionX, randomLaneY, _spawnPositionZ);
         }
     }
 }

@@ -5,8 +5,10 @@ public class PlayerBehaviourController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _yMin;
     [SerializeField] private float _yMax;
+    [SerializeField] private float _smoothTime;
 
     private Rigidbody _rb;
+    private float _currentVelocity;
 
     private void Awake()
     {
@@ -16,10 +18,9 @@ public class PlayerBehaviourController : MonoBehaviour
     private void FixedUpdate()
     {
         float verticalMovement = Input.GetAxis("Vertical");
-        _rb.velocity = new (0, _speed * Time.fixedDeltaTime * verticalMovement, 0);
+        float targetPositionY = Mathf.Clamp(_rb.position.y + verticalMovement * _speed * Time.fixedDeltaTime, _yMin, _yMax);
+        float newTargetPositionY = Mathf.SmoothDamp(_rb.position.y, targetPositionY, ref _currentVelocity, _smoothTime);
 
-        Vector3 boundaryPosition = _rb.position;
-        boundaryPosition.y = Mathf.Clamp(boundaryPosition.y, _yMin, _yMax);
-        _rb.position = boundaryPosition;
+        _rb.MovePosition(new Vector3(_rb.position.x, newTargetPositionY, _rb.position.z));
     }
 }
