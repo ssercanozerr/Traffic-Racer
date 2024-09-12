@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Signals;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +21,16 @@ public class BecureSettingsPanel : MonoBehaviour
     private void Start()
     {
         //OpenSettingsPanel();
+    }
+
+    public void PauseGame()
+    {
+        GameSignal.Instance.onGamePause?.Invoke();
+    }
+
+    public void ResumeGame()
+    {
+        GameSignal.Instance.onGameResume?.Invoke();
     }
 
     public void OpenSettingsPanel()

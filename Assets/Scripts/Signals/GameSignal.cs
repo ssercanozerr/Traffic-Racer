@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Assets.Scripts.Signals
@@ -8,6 +9,9 @@ namespace Assets.Scripts.Signals
         public static GameSignal Instance;
 
         public UnityAction onGameOver;
+        public UnityAction onGamePause;
+        public UnityAction onGameResume;
+        public Func<bool> onGetIsGamePause = delegate { return false; };
 
         private void Awake()
         {

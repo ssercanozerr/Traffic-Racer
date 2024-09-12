@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Assets.Scripts.Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers
@@ -13,7 +14,10 @@ namespace Assets.Scripts.Controllers
 
         private void Update()
         {
-            UpdateScore();
+            if (!GameSignal.Instance.onGetIsGamePause.Invoke())
+            {
+                UpdateScore();
+            }
         }
 
         private void UpdateScore()

@@ -21,6 +21,8 @@ namespace Assets.Scripts.Controllers
         [SerializeField] private GameObject _endPanel;
         [SerializeField] private TextMeshProUGUI _finalScoreText;
 
+        private bool _isGamePause;
+
         private void Start()
         {
             StartCoroutine(SpawnCarsWithInterval());
@@ -30,13 +32,20 @@ namespace Assets.Scripts.Controllers
         {
             while (true)
             {
-                GetRandomCar();
-                yield return new WaitForSeconds(_spawnTime);
-
-                if (CanvasSignal.Instance.onGetScore?.Invoke() >= _spawnTimeDependentScore && _spawnTime != _spawnTimeMin)
+                if (!GameSignal.Instance.onGetIsGamePause.Invoke())
                 {
-                    _spawnTime -= _spawnTimeDecreaseAmount;
-                    _spawnTimeDependentScore += _spawnTimeDependentScoreIncreaseAmount;
+                    GetRandomCar();
+                    yield return new WaitForSeconds(_spawnTime);
+
+                    if (CanvasSignal.Instance.onGetScore?.Invoke() >= _spawnTimeDependentScore && _spawnTime != _spawnTimeMin)
+                    {
+                        _spawnTime -= _spawnTimeDecreaseAmount;
+                        _spawnTimeDependentScore += _spawnTimeDependentScoreIncreaseAmount;
+                    }
+                }
+                else
+                {
+                    yield return null;
                 }
             }
         }
@@ -49,7 +58,22 @@ namespace Assets.Scripts.Controllers
             _finalScoreText.text = CanvasSignal.Instance.onGetScore?.Invoke().ToString();
             _endPanel.SetActive(true);
             
-            Time.timeScale = 0f;
+            GameSignal.Instance.onGamePause?.Invoke();
+        }
+
+        public void OnGamePause()
+        {
+            _isGamePause = true;
+        }
+
+        public void OnGameResume()
+        {
+            _isGamePause = false;
+        }
+
+        public bool OnGetIsGamePause()
+        {
+            return _isGamePause;
         }
 
         private GameObject GetRandomCar()

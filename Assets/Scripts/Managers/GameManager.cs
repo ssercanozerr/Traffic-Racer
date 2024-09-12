@@ -11,11 +11,17 @@ namespace Assets.Scripts.Managers
         private void OnEnable()
         {
             GameSignal.Instance.onGameOver += _gameController.OnGameOver;
+            GameSignal.Instance.onGamePause += _gameController.OnGamePause;
+            GameSignal.Instance.onGameResume += _gameController.OnGameResume;
+            GameSignal.Instance.onGetIsGamePause += _gameController.OnGetIsGamePause;
         }
 
         private void OnDisable()
         {
             GameSignal.Instance.onGameOver -= _gameController.OnGameOver;
+            GameSignal.Instance.onGamePause -= _gameController.OnGamePause;
+            GameSignal.Instance.onGameResume -= _gameController.OnGameResume;
+            GameSignal.Instance.onGetIsGamePause -= _gameController.OnGetIsGamePause;
         }
 
     }

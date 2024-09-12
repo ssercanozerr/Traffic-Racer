@@ -1,3 +1,4 @@
+using Assets.Scripts.Signals;
 using UnityEngine;
 
 public class RoadMoveController : MonoBehaviour
@@ -15,13 +16,21 @@ public class RoadMoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = _speed * Time.fixedDeltaTime * Vector3.left;
-
-        if (_rb.position.x < _loopEndPosition)
+        if (!GameSignal.Instance.onGetIsGamePause.Invoke())
         {
-            Vector3 loopPosition = _rb.position;
-            loopPosition.x = _loopStartPosition;
-            _rb.position = loopPosition;
+            _rb.isKinematic = false;
+            _rb.velocity = _speed * Time.fixedDeltaTime * Vector3.left;
+
+            if (_rb.position.x < _loopEndPosition)
+            {
+                Vector3 loopPosition = _rb.position;
+                loopPosition.x = _loopStartPosition;
+                _rb.position = loopPosition;
+            }
+        }
+        else 
+        {
+            _rb.isKinematic = true;
         }
     }
 }

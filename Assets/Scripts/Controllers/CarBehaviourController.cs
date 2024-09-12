@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Signals;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers
 {
@@ -15,7 +16,15 @@ namespace Assets.Scripts.Controllers
 
         private void FixedUpdate()
         {
-            _rb.velocity = _speed * Time.fixedDeltaTime * Vector3.left;
+            if (!GameSignal.Instance.onGetIsGamePause.Invoke())
+            {
+                _rb.isKinematic = false;
+                _rb.velocity = _speed * Time.fixedDeltaTime * Vector3.left;
+            } 
+            else 
+            {
+                _rb.isKinematic = true;
+            }
         }
     }
 }
