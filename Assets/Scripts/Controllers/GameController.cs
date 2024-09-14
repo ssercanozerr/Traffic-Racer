@@ -78,7 +78,7 @@ namespace Assets.Scripts.Controllers
 
         private GameObject GetRandomCar()
         {
-            int carType = Random.Range(0, 4);
+            int carType = Random.Range(0, 8);
             EntityTypes selectedCarType = (EntityTypes)carType;
             GameObject car = PoolSignal.Instance.onGetObjectFromPool?.Invoke(selectedCarType);
             SetRandomPosition(car);

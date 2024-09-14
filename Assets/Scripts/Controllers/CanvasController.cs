@@ -20,6 +20,11 @@ namespace Assets.Scripts.Controllers
             }
         }
 
+        public float OnGetScore()
+        {
+            return _score;
+        }
+
         private void UpdateScore()
         {
             _timeElapsed += Time.deltaTime;
@@ -31,11 +36,6 @@ namespace Assets.Scripts.Controllers
 
                 _scoreText.text = _score.ToString();
             }
-        }
-
-        public float OnGetScore()
-        {
-            return _score;
         }
     }
 }
