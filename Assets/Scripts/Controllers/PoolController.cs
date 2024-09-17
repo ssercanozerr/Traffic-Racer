@@ -20,19 +20,21 @@ public class PoolController : MonoBehaviour
         CreateObjectPool();
     }
 
-    public GameObject OnGetObjectFromPool(EntityTypes entityType)
+    public GameObject OnGetObjectFromPool<T>(T entityType) where T : Enum
     {
-        if (pools[(int)entityType].pooledObjects == null || pools[(int)entityType].pooledObjects.Count == 0)
+        int entityTypeIndex = Convert.ToInt32(entityType);
+        if (pools[entityTypeIndex].pooledObjects == null || pools[entityTypeIndex].pooledObjects.Count == 0)
         {
             return null;
         }
 
-        GameObject obj = pools[(int)entityType].pooledObjects.Dequeue();
+        GameObject obj = pools[entityTypeIndex].pooledObjects.Dequeue();
         obj.SetActive(true);
-        pools[(int)entityType].pooledObjects.Enqueue(obj);
+        pools[entityTypeIndex].pooledObjects.Enqueue(obj);
 
         return obj;
     }
+
 
     private void CreateObjectPool()
     {

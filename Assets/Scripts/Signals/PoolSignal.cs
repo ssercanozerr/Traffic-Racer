@@ -8,7 +8,7 @@ namespace Assets.Scripts.Signals
     {
         public static PoolSignal Instance;
 
-        public Func<EntityTypes, GameObject> onGetObjectFromPool;
+        public Func<Enum, GameObject> onGetObjectFromPool;
 
         private void Awake()
         {

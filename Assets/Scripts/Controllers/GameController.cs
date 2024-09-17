@@ -79,7 +79,7 @@ namespace Assets.Scripts.Controllers
         private GameObject GetRandomCar()
         {
             int carType = Random.Range(0, 8);
-            EntityTypes selectedCarType = (EntityTypes)carType;
+            EntityTypesAI selectedCarType = (EntityTypesAI)carType;
             GameObject car = PoolSignal.Instance.onGetObjectFromPool?.Invoke(selectedCarType);
             SetRandomPosition(car);
             return car;
