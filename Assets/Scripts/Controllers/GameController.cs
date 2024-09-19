@@ -8,6 +8,8 @@ namespace Assets.Scripts.Controllers
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private Transform _playerCarPosition;
+
         [SerializeField] private float _spawnPositionX;
         [SerializeField] private float[] _spawnPositionsY;
         [SerializeField] private float _spawnPositionZ;
@@ -25,6 +27,17 @@ namespace Assets.Scripts.Controllers
 
         private void Start()
         {
+            int playerCarIndex = CarSelectionSignal.Instance.getSelectedCarIndex;
+            GameObject playerCar = PoolSignal.Instance.onGetObjectFromPool?.Invoke((EntityTypesPlayer)playerCarIndex);
+
+            AudioSource playerAudioSource = playerCar.GetComponent<AudioSource>();
+            PlayerBehaviourController playerBehaviourController = playerCar.GetComponent<PlayerBehaviourController>();
+
+            playerAudioSource.enabled = true;
+            playerBehaviourController.enabled = true;
+
+            playerCar.transform.position = _playerCarPosition.position;
+
             StartCoroutine(SpawnCarsWithInterval());
         }
 
@@ -78,7 +91,7 @@ namespace Assets.Scripts.Controllers
 
         private GameObject GetRandomCar()
         {
-            int carType = Random.Range(0, 8);
+            int carType = Random.Range(2, 10);
             EntityTypesAI selectedCarType = (EntityTypesAI)carType;
             GameObject car = PoolSignal.Instance.onGetObjectFromPool?.Invoke(selectedCarType);
             SetRandomPosition(car);

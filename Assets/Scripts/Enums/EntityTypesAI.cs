@@ -9,6 +9,8 @@
         Car_5,
         Car_6,
         Car_7,
-        Car_8
+        Car_8,
+        Car_9,
+        Car_10
     }
 }

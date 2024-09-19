@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.Signals
 {
-    public class PoolSignal : MonoBehaviour
+    public class CarSelectionSignal : MonoBehaviour
     {
-        public static PoolSignal Instance;
+        public static CarSelectionSignal Instance;
 
-        public Func<Enum, GameObject> onGetObjectFromPool;
+        public int getSelectedCarIndex;
 
         private void Awake()
         {
@@ -18,6 +18,7 @@ namespace Assets.Scripts.Signals
             }
 
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

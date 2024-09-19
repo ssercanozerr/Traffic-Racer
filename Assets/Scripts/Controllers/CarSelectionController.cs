@@ -37,11 +37,6 @@ namespace Assets.Scripts.Controllers
             ShowCar(_selectedCarIndex);
         }
 
-        public GameObject OnGetSelectedCar()
-        {
-            return _currentCar;
-        }
-
         private void ShowCar(int index)
         {
             if (_currentCar != null)
@@ -50,9 +45,11 @@ namespace Assets.Scripts.Controllers
             }
 
             _currentCar = PoolSignal.Instance.onGetObjectFromPool?.Invoke((EntityTypesPlayer)index);
+
             if (_currentCar != null)
             {
                 _currentCar.transform.position = _carPosition.position;
+                CarSelectionSignal.Instance.getSelectedCarIndex = index;
             }
         }
     }
