@@ -11,10 +11,6 @@ namespace Assets.Scripts.Controllers
         private void Start()
         {
             _carIdleSound = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
-            if (_carIdleSound == null)
-            {
-                Debug.Log("asdasdasd");
-            }
         }
 
         public void OnCarCrashSoundPlay()
