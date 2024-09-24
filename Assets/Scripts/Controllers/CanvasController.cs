@@ -9,7 +9,7 @@ namespace Assets.Scripts.Controllers
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private int _scorePerSecond;
 
-        private float _score;
+        private int _score;
         private float _timeElapsed;
 
         private void Update()
@@ -20,9 +20,22 @@ namespace Assets.Scripts.Controllers
             }
         }
 
-        public float OnGetScore()
+        public int OnGetScore()
         {
             return _score;
+        }
+
+        public int OnGetBestScore()
+        {
+            int bestScore = PlayerPrefs.GetInt("BestScore", 0);
+
+            if (_score > bestScore)
+            {
+                PlayerPrefs.SetInt("BestScore", _score);
+                PlayerPrefs.Save();
+            }
+
+            return PlayerPrefs.GetInt("BestScore", 0);
         }
 
         private void UpdateScore()

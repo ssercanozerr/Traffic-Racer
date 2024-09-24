@@ -22,6 +22,7 @@ namespace Assets.Scripts.Controllers
 
         [SerializeField] private GameObject _endPanel;
         [SerializeField] private TextMeshProUGUI _finalScoreText;
+        [SerializeField] private TextMeshProUGUI _bestScoreText;
 
         private bool _isGamePause;
 
@@ -69,6 +70,7 @@ namespace Assets.Scripts.Controllers
             AudioSignal.Instance.onCarCrashSoundPlay?.Invoke();
 
             _finalScoreText.text = CanvasSignal.Instance.onGetScore?.Invoke().ToString();
+            _bestScoreText.text = CanvasSignal.Instance.onGetBestScore?.Invoke().ToString();
             _endPanel.SetActive(true);
             
             GameSignal.Instance.onGamePause?.Invoke();

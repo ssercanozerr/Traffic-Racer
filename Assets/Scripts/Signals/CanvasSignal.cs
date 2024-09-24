@@ -7,7 +7,8 @@ namespace Assets.Scripts.Signals
     {
         public static CanvasSignal Instance;
 
-        public Func<float> onGetScore;
+        public Func<int> onGetScore;
+        public Func<int> onGetBestScore;
 
         private void Awake()
         {
