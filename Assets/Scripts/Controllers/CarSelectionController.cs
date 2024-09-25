@@ -8,8 +8,8 @@ namespace Assets.Scripts.Controllers
 {
     public class CarSelectionController : MonoBehaviour
     {
-        [SerializeField] private Transform _carPosition_1;
-        [SerializeField] private Transform _carPosition_2;
+        [SerializeField] private Transform _carTransform_1;
+        [SerializeField] private Transform _carTransform_2;
         [SerializeField] private GameObject _platform;
         [SerializeField] private GameObject _selectButton;
         [SerializeField] private GameObject _lockIcon;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Controllers
 
         private int _selectedCarIndex = 0;
         private GameObject _currentCar;
-        private Transform carPosition;
+        private Transform _carTransform;
         private Color _disabledColor = Color.gray;
         private Color _enabledColor = new (0f, 0.647f, 0.012f);
 
@@ -52,11 +52,20 @@ namespace Assets.Scripts.Controllers
 
             _currentCar = PoolSignal.Instance.onGetObjectFromPool?.Invoke((EntityTypesPlayer)index);
 
-            if (_selectedCarIndex == 0) { carPosition = _carPosition_1; }
-            else { carPosition = _carPosition_2; }
-                
-            _currentCar.transform.SetPositionAndRotation(carPosition.position, carPosition.rotation);
+            if (index == 0) 
+            { 
+                _carTransform = _carTransform_1; 
+                _carTransform.localScale = _carTransform_1.localScale;
+            }
+            else 
+            { 
+                _carTransform = _carTransform_2;
+                _carTransform.localScale = _carTransform_2.localScale;
+            }
+
             _currentCar.transform.SetParent(_platform.transform, true);
+            _currentCar.transform.localScale = _carTransform.localScale;
+            _currentCar.transform.SetPositionAndRotation(_carTransform.position, _carTransform.rotation);
 
             if (index == 1 && PlayerPrefs.GetInt("BestScore", 0) < _minScore) { CarLockControl(true, _disabledColor); }
             else { CarLockControl(false, _enabledColor); }
